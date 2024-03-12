@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="app_name">Http Cats</string>
+    <string name="httpCodesScale">On a Http Codes scale,</string>
+    <string name="howYourMood">how is your mood today?</string>
+    <string name="informational">Informational</string>
+    <string name="successful">Successful</string>
+    <string name="redirection">Redirection</string>
+    <string name="client_error">Client Error</string>
+    <string name="server_error">Server Error</string>
+    <string name="httpCodeImage">httpCodeImage</string>
+    <string name="yourMoodIs">Your mood is</string>
+    <string name="reload">Reload</string>
+
+
+</resources>

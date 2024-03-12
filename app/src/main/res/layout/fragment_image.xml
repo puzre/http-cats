@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".ui.image.ImageFragment">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:visibility="gone"
+        android:id="@+id/lightLoading"
+        app:lottie_rawRes="@raw/loading"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        android:layout_width="150dp"
+        android:layout_height="150dp"/>
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/darkLoading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+         />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textViewImageTitle"
+            android:textAlignment="center"
+            android:text="@string/yourMoodIs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/imageViewHttpCodeImage"
+            app:layout_constraintStart_toStartOf="@id/imageViewHttpCodeImage"
+            app:layout_constraintEnd_toEndOf="@id/imageViewHttpCodeImage"
+            android:layout_marginBottom="10dp"/>
+
+        <ImageView
+            android:id="@+id/imageViewHttpCodeImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/httpCodeImage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <Button
+            android:id="@+id/reloadImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reload"
+            app:layout_constraintTop_toBottomOf="@id/imageViewHttpCodeImage"
+            app:layout_constraintStart_toStartOf="@id/imageViewHttpCodeImage"
+            app:layout_constraintEnd_toEndOf="@id/imageViewHttpCodeImage"
+            android:layout_marginTop="15dp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

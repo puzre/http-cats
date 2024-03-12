@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Gatos Http</string>
+    <string name="httpCodesScale">En la escala de los códigos Http,</string>
+    <string name="howYourMood">cuál te representa hoy?</string>
+    <string name="informational">Informativas</string>
+    <string name="successful">Satisfactorias</string>
+    <string name="redirection">Redirecciones</string>
+    <string name="client_error">Errores del cliente</string>
+    <string name="server_error">Errores del servidor</string>
+    <string name="httpCodeImage">httpCodeImage</string>
+    <string name="yourMoodIs">Hoy eres</string>
+    <string name="reload">Recargar</string>
+
+</resources>

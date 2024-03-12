@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".ui.pickcode.PickCodeFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/httpCodesScale" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/howYourMood"
+        android:layout_marginBottom="15dp"/>
+
+    <Button
+        android:id="@+id/informationalButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/informational"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:id="@+id/successfulButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/successful"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:id="@+id/redirectionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/redirection"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:id="@+id/clientErrorButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/client_error"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:id="@+id/serverErrorButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/server_error"/>
+
+</LinearLayout>

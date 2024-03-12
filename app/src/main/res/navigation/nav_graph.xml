@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/pickCodeFragment">
+
+    <fragment
+        android:id="@+id/pickCodeFragment"
+        android:name="com.puzre.httpcats.ui.pickcode.PickCodeFragment"
+        android:label="pickCodeFragment"
+        tools:layout="@layout/fragment_pick_code" >
+        <action
+            android:id="@+id/pickCodeFragmentToImageFragment"
+            app:destination="@id/imageFragment"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/imageFragment"
+        android:name="com.puzre.httpcats.ui.image.ImageFragment"
+        android:label="imageFragment"
+        tools:layout="@layout/fragment_image" >
+        <argument
+            android:name="httpCodeIndex"
+            app:argType="integer" />
+    </fragment>
+</navigation>
