@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.puzre.httpcats"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.puzre.httpcats"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 3
         versionName = "3.0"
 
@@ -43,12 +43,12 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.core:core-ktx:1.15.0")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.8.0")
-    implementation("androidx.navigation:navigation-ui-ktx:2.8.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.3")
 
     //Lottie
     implementation("com.airbnb.android:lottie:6.3.0")
