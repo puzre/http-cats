@@ -2,12 +2,12 @@ package com.puzre.httpcats.ui.image
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.puzre.httpcats.data.HttpCode
-import com.puzre.httpcats.data.HttpCodesRepository
+import com.puzre.httpcats.data.model.HttpCat
+import com.puzre.httpcats.data.HttpCatsRepository
 
 class ImageViewModel: ViewModel() {
 
-    private val allHttpCodesList = HttpCodesRepository.getAllCodes()
+    private val allHttpCodesList = HttpCatsRepository.getAllCodes()
     val viewState = MutableLiveData(ImageViewState())
 
     fun onIntent(intent: ImageIntent){
@@ -38,7 +38,7 @@ class ImageViewModel: ViewModel() {
 
     private fun createUrlImage() {
 
-        val urlImage = "https://http.cat/${viewState.value!!.httpCode!!.code}.jpg"
+        val urlImage = "https://http.cat/${viewState.value!!.httpCat!!.code}.jpg"
 
         viewState.postValue(
             viewState.value!!.copy(
@@ -62,20 +62,20 @@ class ImageViewModel: ViewModel() {
     private fun getRandomHttpCode(){
 
         var randomSubIndex: Int?
-        var httpCode: HttpCode
+        var httpCat: HttpCat
 
         do {
 
             randomSubIndex = (0..<allHttpCodesList[viewState.value!!.httpCodeIndex!!].size).random()
-            httpCode = allHttpCodesList[viewState.value!!.httpCodeIndex!!][randomSubIndex]
+            httpCat = allHttpCodesList[viewState.value!!.httpCodeIndex!!][randomSubIndex]
 
-        }while(viewState.value!!.httpCode != null && viewState.value!!.httpCode!!.code == httpCode.code)
+        }while(viewState.value!!.httpCat != null && viewState.value!!.httpCat!!.code == httpCat.code)
 
 
         viewState.postValue(
             viewState.value!!.copy(
                 nextIntent = ImageIntent.OnCreateUrlImage,
-                httpCode = httpCode
+                httpCat = httpCat
             )
         )
 
