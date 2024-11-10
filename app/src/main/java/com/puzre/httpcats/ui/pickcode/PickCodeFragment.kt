@@ -46,8 +46,6 @@ class PickCodeFragment : Fragment(), View.OnClickListener {
             }
         )
 
-        viewModel.allRequest()
-
         binding.informationalButton.setOnClickListener(this)
         binding.successfulButton.setOnClickListener(this)
         binding.redirectionButton.setOnClickListener(this)

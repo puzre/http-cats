@@ -23,16 +23,6 @@ class PickCodeViewModel: ViewModel() {
 
     }
 
-    fun allRequest(){
-        viewModelScope.launch(Dispatchers.IO){
-            Log.d("ResponsesApi", HttpCatsService.instance.getSuccessfulHttpCats().toString())
-            Log.d("ResponsesApi", HttpCatsService.instance.getServerErrorHttpCats().toString())
-            Log.d("ResponsesApi", HttpCatsService.instance.getRedirectionHttpCats().toString())
-            Log.d("ResponsesApi", HttpCatsService.instance.getInformationalHttpCats().toString())
-            Log.d("ResponsesApi", HttpCatsService.instance.getClientErrorHttpCats().toString())
-        }
-    }
-
     private fun clickHttpCodeButton(nextIntent: PickCodeIntent) {
 
         viewState.postValue(
