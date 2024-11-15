@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.devtools.ksp")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -56,7 +57,7 @@ dependencies {
     implementation("com.airbnb.android:lottie:6.3.0")
 
     //Glide
-    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.github.bumptech.glide:glide:4.14.2")
     ksp("com.github.bumptech.glide:ksp:4.14.2")
 
     //Retrofit
