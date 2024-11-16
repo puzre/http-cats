@@ -1,12 +1,16 @@
 package com.puzre.httpcats.ui.image
 
-sealed class ImageIntent {
+import com.puzre.httpcats.mvi.Intent
+
+sealed class ImageIntent: Intent() {
 
     data object NoIntent: ImageIntent()
 
-    data class OnSaveHttpCodeIndex(val httpCodeIndex: Int): ImageIntent()
+    data class OnViewCreated(val httpCodeIndex: Int?): ImageIntent()
 
-    data object OnGetRandomHttpCode: ImageIntent()
+    data object OnGetHttpCatListByIndex: ImageIntent()
+
+    data object OnGetRandomHttpCat: ImageIntent()
 
     data object OnCreateUrlImage: ImageIntent()
 

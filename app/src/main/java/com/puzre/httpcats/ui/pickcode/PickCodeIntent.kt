@@ -1,11 +1,15 @@
 package com.puzre.httpcats.ui.pickcode
 
-sealed class PickCodeIntent {
+import com.puzre.httpcats.mvi.Intent
+
+sealed class PickCodeIntent: Intent() {
 
     data object NoIntent: PickCodeIntent()
 
-    data class OnGoToImageFragment(val httpCodeIndex: Int): PickCodeIntent()
+    data class OnGoToImageFragmentIntent(val httpCodeTypeIndex: Int): PickCodeIntent()
 
-    data class OnClickHttpCodeButton(val nextIntent: PickCodeIntent): PickCodeIntent()
+    data class OnClickHttpCodeButtonIntent(val httpCodeTypeIndex: Int): PickCodeIntent()
+
+    data object OnResetStateIntent: PickCodeIntent()
 
 }

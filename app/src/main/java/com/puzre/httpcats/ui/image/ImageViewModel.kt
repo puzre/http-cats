@@ -1,92 +1,127 @@
 package com.puzre.httpcats.ui.image
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.puzre.httpcats.data.model.HttpCat
+import androidx.lifecycle.map
 import com.puzre.httpcats.data.HttpCatsRepository
+import com.puzre.httpcats.data.model.HttpCat
+import com.puzre.httpcats.mvi.Lse
 
-class ImageViewModel: ViewModel() {
+class ImageViewModel : ViewModel() {
 
-    private val allHttpCodesList = HttpCatsRepository.getAllCodes()
-    val viewState = MutableLiveData(ImageViewState())
+    private var currentViewState = ImageViewState()
+    private val resultIntent = MutableLiveData<Lse<ImageResultIntent>>()
 
-    fun onIntent(intent: ImageIntent){
+    val viewState: LiveData<ImageViewState> = resultIntent.map { castResultIntent(it) }
 
-        when(intent){
+    private fun castResultIntent(resultIntent: Lse<ImageResultIntent>): ImageViewState {
 
-            is ImageIntent.OnSaveHttpCodeIndex -> saveHttpCode(intent.httpCodeIndex)
-            is ImageIntent.OnGetRandomHttpCode -> getRandomHttpCode()
-            is ImageIntent.OnCreateUrlImage -> createUrlImage()
-            is ImageIntent.LoadImageSuccess -> loadImageSuccess()
-            is ImageIntent.OnReloadImage -> reloadImage()
+        currentViewState = when (resultIntent) {
+
+            is Lse.Loading -> {
+                currentViewState.copy(
+                    isLoading = true,
+                    nextIntent = ImageIntent.NoIntent
+                )
+            }
+
+            is Lse.Success -> {
+                when (resultIntent.intent) {
+
+                    is ImageResultIntent.GetRandomHttpCat -> {
+                        currentViewState.copy(
+                            isLoading = false,
+                            nextIntent = ImageIntent.NoIntent,
+                            dataBinding = currentViewState.dataBinding.copy(
+                                randomHttpCat = resultIntent.intent.randomHttpCat
+                            )
+                        )
+                    }
+
+                    is ImageResultIntent.GetHttpCatsListByIndex -> {
+                        currentViewState.copy(
+                            isLoading = false,
+                            nextIntent = ImageIntent.OnGetRandomHttpCat,
+                            dataBinding = currentViewState.dataBinding.copy(
+                                httpCatList = resultIntent.intent.httpCatList
+                            )
+                        )
+                    }
+
+                    is ImageResultIntent.ViewCreatedResultIntent -> {
+                        currentViewState.copy(
+                            isLoading = false,
+                            nextIntent = ImageIntent.OnGetHttpCatListByIndex,
+                            dataBinding = currentViewState.dataBinding.copy(
+                                httpCodeIndex = resultIntent.intent.httpCodeIndex
+                            )
+                        )
+                    }
+                }
+            }
+
+            is Lse.Error -> {
+                when (resultIntent.intent) {
+                    else -> {
+                        currentViewState.copy(
+                            isLoading = false,
+                            nextIntent = ImageIntent.NoIntent
+                        )
+                    }
+                }
+            }
+
+        }
+
+        return currentViewState
+
+    }
+
+    fun onIntent(intent: ImageIntent) {
+
+        when (intent) {
+
+            is ImageIntent.OnViewCreated -> viewCreated(intent.httpCodeIndex)
+            is ImageIntent.OnGetHttpCatListByIndex -> getHttpCatListByIndex()
+            is ImageIntent.OnGetRandomHttpCat -> getRandomHttpCat()
             else -> {}
 
         }
 
     }
 
-    private fun loadImageSuccess() {
-
-        viewState.postValue(
-            viewState.value!!.copy(
-                isLoading = false,
-                nextIntent = ImageIntent.NoIntent
+    private fun getHttpCatListByIndex() {
+        resultIntent.postValue(
+            Lse.Success(
+                ImageResultIntent.GetHttpCatsListByIndex(
+                    httpCatList = HttpCatsRepository.getAllCodes()[currentViewState.dataBinding.httpCodeIndex
+                        ?: 0]
+                )
             )
         )
-
     }
 
-    private fun createUrlImage() {
-
-        val urlImage = "https://http.cat/${viewState.value!!.httpCat!!.code}.jpg"
-
-        viewState.postValue(
-            viewState.value!!.copy(
-                nextIntent = ImageIntent.OnLoadImage(urlImage)
+    private fun viewCreated(httpCodeIndex: Int?) {
+        resultIntent.postValue(
+            Lse.Success(
+                ImageResultIntent.ViewCreatedResultIntent(
+                    httpCodeIndex = httpCodeIndex
+                )
             )
         )
-
     }
 
-    private fun saveHttpCode(httpCodeIndex: Int) {
+    private fun getRandomHttpCat() {
 
-        viewState.postValue(
-            viewState.value!!.copy(
-                nextIntent = ImageIntent.OnGetRandomHttpCode,
-                httpCodeIndex = httpCodeIndex
-            )
-        )
+        val randomIndex = (0..<currentViewState.dataBinding.httpCatList.size).random()
+        val randomHttpCat = currentViewState.dataBinding.httpCatList[randomIndex]
 
-    }
-
-    private fun getRandomHttpCode(){
-
-        var randomSubIndex: Int?
-        var httpCat: HttpCat
-
-        do {
-
-            randomSubIndex = (0..<allHttpCodesList[viewState.value!!.httpCodeIndex!!].size).random()
-            httpCat = allHttpCodesList[viewState.value!!.httpCodeIndex!!][randomSubIndex]
-
-        }while(viewState.value!!.httpCat != null && viewState.value!!.httpCat!!.code == httpCat.code)
-
-
-        viewState.postValue(
-            viewState.value!!.copy(
-                nextIntent = ImageIntent.OnCreateUrlImage,
-                httpCat = httpCat
-            )
-        )
-
-    }
-
-    private fun reloadImage(){
-
-        viewState.postValue(
-            viewState.value!!.copy(
-                isLoading = true,
-                nextIntent = ImageIntent.OnGetRandomHttpCode
+        resultIntent.postValue(
+            Lse.Success(
+                ImageResultIntent.GetRandomHttpCat(
+                    randomHttpCat = randomHttpCat
+                )
             )
         )
 

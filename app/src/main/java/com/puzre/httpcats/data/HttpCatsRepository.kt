@@ -4,14 +4,14 @@ import com.puzre.httpcats.data.model.HttpCat
 
 object HttpCatsRepository {
 
-    fun getAllCodes() = arrayOf(
-        arrayOf(
+    fun getAllCodes() = listOf(
+        listOf(
             HttpCat("100", "Continue"),
             HttpCat("101", "Switching Protocols"),
             HttpCat("102", "Processing"),
             HttpCat("103", "Early Hints")
         ),
-        arrayOf(
+        listOf(
             HttpCat("200", "OK"),
             HttpCat("201", "Created"),
             HttpCat("202", "Accepted"),
@@ -23,7 +23,7 @@ object HttpCatsRepository {
             HttpCat("208", "Already Reported"),
             HttpCat("226", "IM Used")
         ),
-        arrayOf(
+        listOf(
             HttpCat("300", "Multiple Choices"),
             HttpCat("301", "Moved Permanently"),
             HttpCat("302", "Found"),
@@ -33,7 +33,7 @@ object HttpCatsRepository {
             HttpCat("307", "Temporary Redirect"),
             HttpCat("308", "Permanent Redirect")
         ),
-        arrayOf(
+        listOf(
             HttpCat("400", "Bad Request"),
             HttpCat("401", "Unauthorized"),
             HttpCat("402", "Payment Required"),
@@ -70,7 +70,7 @@ object HttpCatsRepository {
             HttpCat("498", "Token expired/invalid"),
             HttpCat("499", "Client Closed Request")
         ),
-        arrayOf(
+        listOf(
             HttpCat("500", "Internal Server Error"),
             HttpCat("501", "Not Implemented"),
             HttpCat("502", "Bad Gateway"),

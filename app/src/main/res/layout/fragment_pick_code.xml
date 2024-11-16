@@ -1,55 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     tools:context=".ui.pickcode.PickCodeFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/httpCodesScale" />
+    <data>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/howYourMood"
-        android:layout_marginBottom="15dp"/>
+        <variable
+            name="viewEvents"
+            type="com.puzre.httpcats.ui.pickcode.PickCodeViewEvents" />
 
-    <Button
-        android:id="@+id/informationalButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/informational"
-        android:layout_marginBottom="10dp"/>
+    </data>
 
-    <Button
-        android:id="@+id/successfulButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/successful"
-        android:layout_marginBottom="10dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/redirectionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/redirection"
-        android:layout_marginBottom="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/httpCodesScale" />
 
-    <Button
-        android:id="@+id/clientErrorButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/client_error"
-        android:layout_marginBottom="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="@string/howYourMood" />
 
-    <Button
-        android:id="@+id/serverErrorButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/server_error"/>
+        <Button
+            android:id="@+id/informationalButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:onClick="@{viewEvents::onClickInformational}"
+            android:text="@string/informational" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/successfulButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:onClick="@{viewEvents::onClickSuccessful}"
+            android:text="@string/successful" />
+
+        <Button
+            android:id="@+id/redirectionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:onClick="@{viewEvents::onClickRedirection}"
+            android:text="@string/redirection" />
+
+        <Button
+            android:id="@+id/clientErrorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:onClick="@{viewEvents::onClickClientError}"
+            android:text="@string/client_error" />
+
+        <Button
+            android:id="@+id/serverErrorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{viewEvents::onClickServerError}"
+            android:text="@string/server_error" />
+
+    </LinearLayout>
+</layout>

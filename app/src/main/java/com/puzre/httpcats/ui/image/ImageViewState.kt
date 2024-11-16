@@ -6,7 +6,6 @@ data class ImageViewState(
 
     val isLoading: Boolean =  true,
     val nextIntent: ImageIntent = ImageIntent.NoIntent,
-    val httpCodeIndex: Int? = null,
-    val httpCat: HttpCat? = null
+    val dataBinding: ImageDataBinding = ImageDataBinding()
 
 )
