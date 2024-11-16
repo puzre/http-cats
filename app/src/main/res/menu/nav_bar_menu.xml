@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/allCatsFragment"
+        android:icon="@drawable/list_ic"
+        android:title="@string/allCats" />
+    <item
+        android:id="@+id/pickCodeFragment"
+        android:icon="@drawable/http_ic"
+        android:title="@string/randomCat" />
+
+</menu>

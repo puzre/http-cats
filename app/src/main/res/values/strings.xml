@@ -1,6 +1,8 @@
 <resources>
 
     <string name="app_name">Http Cats</string>
+
+    <!--    Pick Code Fragment      -->
     <string name="httpCodesScale">On a Http Codes scale,</string>
     <string name="howYourMood">how is your mood today?</string>
     <string name="informational">Informational</string>
@@ -9,8 +11,16 @@
     <string name="client_error">Client Error</string>
     <string name="server_error">Server Error</string>
     <string name="httpCodeImage">httpCodeImage</string>
+
+    <!--    Image Fragment      -->
     <string name="yourMoodIs">Your mood is</string>
     <string name="reload">Reload</string>
 
+
+    <!--    Nav bar     -->
+    <string name="allCats">All Cats</string>
+    <string name="randomCat">Random Cat</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
