@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/pickCodeFragment">
+    app:startDestination="@id/allCatsFragment">
+
+    <fragment
+        android:id="@+id/allCatsFragment"
+        android:name="com.puzre.httpcats.ui.allcats.AllCatsFragment"
+        android:label="allCatsFragment"
+        tools:layout="@layout/fragment_all_cats"/>
 
     <fragment
         android:id="@+id/pickCodeFragment"

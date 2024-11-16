@@ -2,6 +2,8 @@
 <resources>
 
     <string name="app_name">Gatos Http</string>
+
+    <!--    Pick Code Fragment      -->
     <string name="httpCodesScale">En la escala de los códigos Http,</string>
     <string name="howYourMood">cuál te representa hoy?</string>
     <string name="informational">Informativas</string>
@@ -10,7 +12,13 @@
     <string name="client_error">Errores del cliente</string>
     <string name="server_error">Errores del servidor</string>
     <string name="httpCodeImage">httpCodeImage</string>
+
+    <!--    Image Fragment      -->
     <string name="yourMoodIs">Hoy eres</string>
     <string name="reload">Recargar</string>
+
+    <!--    Nav bar     -->
+    <string name="allCats">Gatos</string>
+    <string name="randomCat">Gato Aleatorio</string>
 
 </resources>
