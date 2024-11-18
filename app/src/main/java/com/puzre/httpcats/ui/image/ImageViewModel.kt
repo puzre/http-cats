@@ -4,9 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.puzre.httpcats.data.HttpCatsRepository
 import com.puzre.httpcats.data.model.HttpCat
+import com.puzre.httpcats.data.model.Result
 import com.puzre.httpcats.mvi.Lse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ImageViewModel : ViewModel() {
 
@@ -83,7 +87,7 @@ class ImageViewModel : ViewModel() {
         when (intent) {
 
             is ImageIntent.OnViewCreated -> viewCreated(intent.httpCodeIndex)
-            is ImageIntent.OnGetHttpCatListByIndex -> getHttpCatListByIndex()
+            is ImageIntent.OnGetHttpCatListByIndex -> viewModelScope.launch(Dispatchers.IO) { getHttpCatListByIndex() }
             is ImageIntent.OnGetRandomHttpCat -> getRandomHttpCat()
             else -> {}
 
@@ -91,15 +95,59 @@ class ImageViewModel : ViewModel() {
 
     }
 
-    private fun getHttpCatListByIndex() {
+    private suspend fun getHttpCatListByIndex() {
+
         resultIntent.postValue(
-            Lse.Success(
-                ImageResultIntent.GetHttpCatsListByIndex(
-                    httpCatList = HttpCatsRepository.getAllCodes()[currentViewState.dataBinding.httpCodeIndex
-                        ?: 0]
-                )
-            )
+            Lse.Loading()
         )
+
+        val response = when (currentViewState.dataBinding.httpCodeIndex ?: 0) {
+            0 -> {
+                HttpCatsRepository.instance.getInformationalHttpCats()
+            }
+
+            1 -> {
+                HttpCatsRepository.instance.getSuccessfulHttpCats()
+            }
+
+            2 -> {
+                HttpCatsRepository.instance.getRedirectionHttpCats()
+            }
+
+            3 -> {
+                HttpCatsRepository.instance.getClientErrorHttpCats()
+            }
+
+            4 -> {
+                HttpCatsRepository.instance.getServerErrorHttpCats()
+            }
+
+            else -> {
+                HttpCatsRepository.instance.getInformationalHttpCats()
+            }
+        }
+
+        when (response) {
+            is Result.Success -> {
+                resultIntent.postValue(
+                    Lse.Success(
+                        ImageResultIntent.GetHttpCatsListByIndex(
+                            httpCatList = response.data
+                        )
+                    )
+                )
+            }
+
+            is Result.Error -> {
+
+            }
+
+            is Result.Exception -> {
+
+            }
+        }
+
+
     }
 
     private fun viewCreated(httpCodeIndex: Int?) {

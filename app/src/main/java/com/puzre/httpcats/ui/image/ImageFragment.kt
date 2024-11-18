@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.puzre.httpcats.databinding.FragmentImageBinding
+import com.puzre.httpcats.ui.loading.LoadingFragment
 
 class ImageFragment : Fragment(), ImageViewEvents {
 
@@ -46,6 +47,7 @@ class ImageFragment : Fragment(), ImageViewEvents {
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer {
 
+            LoadingFragment.instance.showLoading(it.isLoading, parentFragmentManager)
             when (it.nextIntent) {
 
                 is ImageIntent.OnGetHttpCatListByIndex -> viewModel.onIntent(ImageIntent.OnGetHttpCatListByIndex)
